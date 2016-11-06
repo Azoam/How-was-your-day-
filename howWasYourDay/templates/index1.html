@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<DOCTYPE HTML>
 <html>
 	<head>
 		<title> How was your day? </title>
@@ -12,9 +12,9 @@
 			<h1 id="title" style=font-size: 50px> How was your day? </h1>
 		<div class= "question">
     		<h3 id="question"> Please, tell us how your day was here: </h3>
-				<form action="form_hit" method="METH">
-				<input type="textarea" id="rant" name="rant_text" placeholder="{{rant_text}}"><br>
-				<input type="submit" value="Submit">
+				<form method="post" action="/form_hit">
+					<input type="textarea" id="rant" name="rant_text" placeholder="{{rant_text}}"><br>
+					<input type="submit" value="Submit">
 				</form>
     	</div>
     	<div class="response">
@@ -23,9 +23,6 @@
             {{ rant_text }}
             </textarea>
 		</div>
-
 		<div class="bottom"></div>
-
 	</body>
-
 </html>
