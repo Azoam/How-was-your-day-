@@ -6,6 +6,7 @@ Hack NJIT 2016 Project
 I added `.md` files for the folders I made and comments for everything.
 
 - [ ] make the thing
+- [ ] install watson api: $ pip install --upgrade watson-developer-cloud
 - [ ] remove / edit the random md files when everything works.
 
 ### How HTML forms are handled in flask
