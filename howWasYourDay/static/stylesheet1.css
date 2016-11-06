@@ -20,13 +20,13 @@ div.question{
 #response {
   color:#F9EBEA;
   text-align:center;
+  vertical-align:middle;
 }
 #answer {
-  margin:auto;
-  resize:none;
-  text-align:center;
-  width:35%;
-  height:90px;
+    text-align:center;
+    resize:none;
+    width:35%;
+    height:90px;
 }
 #rant {
   margin:auto;

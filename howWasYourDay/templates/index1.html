@@ -1,14 +1,9 @@
-<DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<title> How was your day? </title>
-		<!-- Worry about tab icon for later, need domain -->
 		<link rel="shortcut icon" href="/favicon.ico"/>
-<<<<<<< HEAD
-		<link rel="stylesheet" type="text/css" href="/static/stylesheet1.css">
-=======
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='stylesheet1.css') }}">
->>>>>>> e8533f8bf12d1635a8ec6f3863c4fb260262d64e
+		<link rel="stylesheet" type="text/css" href="/static/stylesheet.css">
 	</head>
 
 	<body>
@@ -17,15 +12,13 @@
 		<div class= "question">
     		<h3 id="question"> Please, tell us how your day was here: </h3>
 				<form method="post" action="/form_hit">
-					<input type="textarea" id="rant" name="rant_text" placeholder="{{rant_text}}"><br>
+					<textarea wrap:"hard" id="rant" name="rant_text" placeholder="{{rant_text}}"></textarea><br>
 					<input type="submit" value="Submit">
 				</form>
     	</div>
     	<div class="response">
 			<h3 id="response"> Here are my thoughts... </h3>
-            <textarea rows="5" cols="10" id="answer">
-            {{ response_text }}
-            </textarea>
+            <textarea id="answer" wrap:"hard" readonly>{{ response_text }} </textarea>
 		</div>
 		<div class="bottom"></div>
 	</body>
