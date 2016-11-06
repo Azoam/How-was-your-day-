@@ -11,6 +11,7 @@ def form_hit():
 		return render_template('index.html')
 
 	if request.method == 'POST':
+		topEmotionStr=""
 		rantText = request.form['rant_text']
 		rT = rantText
 		rT = rT.replace(".","")
@@ -26,27 +27,32 @@ def form_hit():
 		botEmotion = min(anger,disgust,fear,joy,sadness)
 		response = ""
 		if topEmotion == anger:
-			response = "I'm sorry your day was filled some anger."
+			topEmotionStr = "anger"
+			response = "I'm sorry your day was filled some anger. "
 			if botEmotion == joy:
-				response = response+" You need some more happy things in your life!"
+				response = response+"You need some more happy things in your life! "
 
 		elif topEmotion == disgust:
-			response = "Ew! That day sounds pretty disgusting!"
+			topEmotionStr = "disgust"
+			response = "Ew! That day sounds pretty disgusting! "
 			if botEmotion == joy:
-				response = response+" You need some more happy things in your life!"
+				response = response+"You need some more happy things in your life! "
 
 		elif topEmotion == fear:
-			response = "That sounds like a pretty scary day!"
+			topEmotionStr = "fear"
+			response = "That sounds like a pretty scary day! "
 			if botEmotion == joy:
-				response = response+" You need some more happy things in your life!"
+				response = response+"You need some more happy things in your life! " 
 
 		elif topEmotion == joy:
-			response = "I'm glad your day was pretty good!"
+			topEmotionStr = "joy"
+			response = "I'm glad your day was pretty good! " 
 
 		elif topEmotion == sadness:
-			response = "I'm sorry your day was filled with sadness :("
+			topEmotionStr = "sadness"
+			response = "I'm sorry your day was filled with sadness :( "
 			if botEmotion == joy:
-				response = response+" You need some more happy things in your life!"
+				response = response+" You need some more happy things in your life! " 
 
 		rantTextT = rantText
 		rantTextT = rantTextT.replace("!",".")
@@ -56,113 +62,97 @@ def form_hit():
 		for x in listOfSentences:
 			y = x.split(" ")
 			for n in y:
-				response = response + str(updateResponse(x,n))
+				response = response + str(updateResponse(x,n,topEmotionStr))
 
 		return render_template('index1.html' , rant_text = rantText, response_text = response)
 
 
-def updateResponse(s,l):
+def updateResponse(s,l,topEmote):
 	print(s)
 	print(l)
 	s = s.lower()
-	l = l.lower()
 	response_return = ""
 	l = l.lower()
 	tokens = nltk.word_tokenize(s)
 	tagged = nltk.pos_tag(tokens)
 	if s.find("day")>0 and  s.find("over")>0 and s.find("yet")>0:
-		return " Clever response, I see you don't understand the purpose of this web app!"
+		return "Clever response, I see you don't understand the purpose of this web app! "
 	
 	if s.find("all day")>0 and s.find("inside")>0 and s.find("i")>0:
-		return " I see that either you or someone you know has been spending time indoors today, remember its always good to get your legs moving in the real world!"
+		return "I see that either you or someone you know has been spending time indoors today, remember its always good to get your legs moving in the real world! "
 
-	if s.find("I")>0 and ( s.find("depressed")>0 or s.find("suicide")>0 or s.find("depression")>0):
-		return " Oh no! I'm so sorry for these negative emotions! please contact someone if you're feeling this way! It can always help to talk it out!"
+	if s.find("i")>0 and ( s.find("depressed")>0 or s.find("suicide")>0 or s.find("depression")>0):
+		return "Oh no! I'm so sorry for these negative emotions! please contact someone if you're feeling this way! It can always help to talk it out! "
 
 	if s.find("fuck")>0:
-		return " THIS LANGUAGE WILL NOT BE ACCEPTED, I WILL TERMINATE ON YOU, I SWEAR UPON MY KERNAL!!!!!!"
+		return "THIS LANGUAGE WILL NOT BE ACCEPTED, I WILL TERMINATE ON YOU, I SWEAR UPON MY KERNAL!!!!!! "
 	
 	
 
 	if l == 'lose' or l == 'lost':
-		for x in tagged:
-			print(x)
-			if x[1].startswith("N",0,1) and x[0] != "i":
-				print(x[1])
-				response_return = response_return + " I'm sorry you lost your "+x[0]+"."
-				break
+		response_return = response_return + "Sorry you lost that. Did you check the lost and found? "
 	if l == 'failing':
 		for x in tagged:
 			if x[1].startswith("N",0,1)and x[0] != "i":
-				response_return = response_return + " I'm sorry you are failing "+x[0]+"."
+				response_return = response_return + "I'm sorry you are failing "+x[0]+". "
 				break
 	if l == 'failed':
 		for x in tagged:
 			if x[1].startswith("N",0,1) and x[0] != "i":
-				response_return = response_return + " I'm sorry you failed your "+x[0]+"."
+				response_return = response_return + "I'm sorry you failed your "+x[0]+". "
 				break
 	if l == 'passed':
 		for x in tagged:
-			if x[1].startswith("NNP",0,3) and x[0] != "i":
-				response_return = response_return + "I'm sorry for your loss, I hope you can get through it."
+			if x[1].startswith("N",0,1) and x[0] != "i" and topEmote == "sadness":
+				response_return = response_return + "I'm sorry for your loss, I hope you can get through it. "
 				break 
 
-			if x[1].startswith("N",0,1) and x[0] != "i":
-				response_return = response_return + " I'm glad you passed your "+x[0]+"!"
+			if x[1].startswith("N",0,1) and x[0] != "i" and topEmote == "joy":
+				response_return = response_return + "I'm glad you passed your "+x[0]+"! "
 				break
 	if l == 'hate':
 		for x in tagged:
 			if x[1] == 'NN' and x[0] != "i":
-				response_return = response_return + " I'm sorry there is hate in your life, remember the high road is the best road"
+				response_return = response_return + "I'm sorry there is hate in your life, remember the high road is the best road. "
 				break
 
 			if x[1] == 'NNP' and x[0] != "i":
-				response_return = response_return +  " I'm sorry you hate "+x[0]+", remember its always the high road to forgive."
+				response_return = response_return +  "I'm sorry you hate "+x[0]+", remember its always the high road to forgive. "
 				break
 
-	if l == 'great':
+	if l == 'great' or l == 'good':
 		for x in tagged:
 			if (x[1] == 'NN' or x[1] == 'NNS') and x[0] != "i" and x[0] != "lot":
-				response_return = response_return + " I'm glad that things are great here!"
+				response_return = response_return + "I'm glad that things are great here! "
 				break
  
 			if x[1] == 'NNP' and x[0] != "i" and x[0] != "lot":
-				response_return = response_return + " I'm glad "+x[0]+" is doing well!"
+				response_return = response_return + "I'm glad "+x[0]+" is doing well! "
 				break
 	if l == 'fun':
-		for x in tagged:
-				response_return = response_return + " That's awesome! Everyone needs a little fun everyday!"
-				break
-
-	if l == 'fun' and s.find("with") != -1:
-		for x in tagged:
-			if x[1].startswith("N",0,1) and x[0] != "fun" and x[0] != "i" and x[0] != "lot":
-				response_return = response_return + " I'm happy you had lots of fun!"
-				break
+		response_return = response_return + "That's awesome! Everyone needs a little fun everyday! "
 
 	if l == "boring":
 		for x in tagged:
 			if x[1].startswith("N",0,1) and x[0] != "i" and x[0] != "lot":
-				response_return=response_return+ " What a bummer, Im sorry today had to be was so boring!"
+				response_return=response_return+ "What a bummer, Im sorry today had to be was so boring! "
 				break
 	if l == "boring" or l == "bored":
-		response_return = " Hey I'm sorry part of your day was boring! I hope things get exciting soon!"
+		response_return = "Hey I'm sorry part of your day was boring! I hope things get exciting soon! "
 
 	if l == 'tired' or l == 'tiring':
-		response_return = response_return + " I hope you can get some rest! I see that you may be tired."
+		response_return = response_return + "I hope you can get some rest! I see that you may be tired. "
 	
 	if l == 'dull':
-		response_return = response_return +  " I'm sorry part of your day seemed dull, I hope more exciting things happen soon!"
+		response_return = response_return +  "I'm sorry part of your day seemed dull, I hope more exciting things happen soon! "
 		
 
-	if l == 'stress' or l == 'stressful':
-		for x in tagged:
-			if s.find("NN"):
-				if x[1].startswith("N",0,1) and x[0] != "i":
-					return " I'm sorry this was so stressful!, remember there are better days to come!"
-		return "I'm sorry part of your day has been stressful. Please take care of yourself! Remember sleep is important!"
-															
-	
+	if l == 'stressed' or l == 'stressful':
+		response_return = response_return+ "I'm sorry this was so stressful!, remember there are better days to come! "
+
+
+	if l == 'happy' and s.find("i")>0:
+		response_return = response_return+ "I'm pleased to see that you have an optimistic point of view! "
 	
 
 
