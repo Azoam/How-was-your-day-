@@ -26,6 +26,7 @@ div.question{
   resize:none;
   text-align:center;
   width:35%;
+  height:90px;
 }
 #rant {
   margin:auto;
