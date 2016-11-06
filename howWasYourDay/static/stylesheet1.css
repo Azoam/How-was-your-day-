@@ -24,15 +24,15 @@ div.question{
 #answer {
   text-align:center;
   resize:none;
-  width:35%;
-  height:90px;
+  width:55%;
+  height:100px;
 }
 #rant {
   margin:auto;
   resize:none;
   text-align:center;
   width:35%;
-  height:15%;
+  height:90px;
 }
 div.response{
     text-align:center;
