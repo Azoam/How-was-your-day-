@@ -22,20 +22,28 @@ def form_hit():
 		botEmotion = min(anger,disgust,fear,joy,sadness)
 		response = ""
 		if topEmotion == anger:
-			response = "I'm sorry your day was filled some anger"
+			response = "I'm sorry your day was filled some anger."
+			if botEmotion == joy:
+				response = response+" You need some more happy things in your life!"
 
 		if topEmotion == disgust:
 			response = "Ew! That day sounds pretty disgusting!"
-	
+			if botEmotion == joy:
+				response = response+" You need some more happy things in your life!"
+
 		if topEmotion == fear:
 			response = "That sounds like a pretty scary day!"
+			if botEmotion == joy:
+				response = response+" You need some more happy things in your life!"
 
 		if topEmotion == joy:
-			response = "I'm glad your day was pretty good!" 
-	
+			response = "I'm glad your day was pretty good!"
+
 		if topEmotion == sadness:
 			response = "I'm sorry your day was filled with sadness :("
-		
+			if botEmotion == joy:
+				response = response+" You need some more happy things in your life!"
+
 		rantTextT = rantText
 		rantTextT = rantTextT.replace("!",".")
 		rantTextT = rantTextT.replace("?",".")
@@ -47,8 +55,8 @@ def form_hit():
 				response = response + str(updateResponse(x,n))
 
 		return render_template('index1.html' , rant_text = rantText, response_text = response)
-	
-	
+
+
 def updateResponse(s,l):
 	print(s)
 	print(l)
@@ -60,6 +68,20 @@ def updateResponse(s,l):
 			if x[1] == 'NN' or x[1] == 'NNP':
 				print(x[1])
 				return " I'm sorry you lost your "+x[0]
+	if l == 'fail':
+		for x in tagged:
+			if x[1] == 'NN' or x[1] == 'NNP':
+				return " I'm sorry you are failing your "+x[0]
+	if l == 'failed':
+		for x in tagged:
+			if x[1] == 'NN' or x[1] == 'NNP':
+				return " I'm sorry you failed your "+x[0]
+	if l == 'passed':
+		for x in tagged:
+			if x[1] == 'NN' or x[1] == 'NNP':
+				return " I'm glad you passed your "+x[0]+"!"
+	if l == 'hate':
+		for x in tagged:
+			if x[1] == 'NN' or x[1] == 'NNP':
+				return "I'm sorry you hate your "+x[0]
 	return ""
-			
-
