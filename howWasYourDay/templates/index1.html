@@ -1,31 +1,30 @@
 <!DOCTYPE HTML>
 <html>
-
-<div class:"top"> </div>
-
 	<head>
 		<title> How was your day? </title>
-		<link rel="shortcut icon" href="C:\HackathonNJIT\How-was-your-day-\howWasYourDay\templates\favicon.ico" />
 		<!-- Worry about tab icon for later, need domain -->
+		<link rel="shortcut icon" href="/favicon.ico"/>
 		<link rel="stylesheet" type="text/css" href="static/stylesheet1.css">
 	</head>
 
 	<body>
+	    <div class="top"> </div>
 			<h1 id="title" style=font-size: 50px> How was your day? </h1>
-			<h3 id="response"> Here is the response... </h3>
-
-			<p>
+		<div class= "question">
+    		<h3 id="question"> Please, tell us how your day was here: </h3>
 				<form action="form_hit" method="METH">
-				<input type="text" name="rant_text" placeholder={{ rant_text }}><br>
+				<input type="textarea" id="rant" name="rant_text" placeholder="{{rant_text}}"><br>
 				<input type="submit" value="Submit">
 				</form>
-			</p>
+    	</div>
+    	<div class="response">
+			<h3 id="response"> Here are my thoughts... </h3>
+            <textarea rows="5" cols="10" id="answer">
+            {{ rant_text }}
+            </textarea>
+		</div>
 
-			<form>
-  			<textarea>
-					{{ response }}
-				</textarea>
-			</form>
+		<div class="bottom"></div>
 
 	</body>
 

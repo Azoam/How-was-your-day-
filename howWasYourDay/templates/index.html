@@ -1,25 +1,29 @@
 <!DOCTYPE HTML>
 <html>
 
-<div class:"top"> </div>
-
 	<head>
 		<title> How was your day? </title>
-		<link rel="shortcut icon" href="C:\HackathonNJIT\How-was-your-day-\howWasYourDay\templates\favicon.ico" />
 		<!-- Worry about tab icon for later, need domain -->
-		<link rel="stylesheet" type="text/css" href="/static/stylesheet.css">
+		<link rel="shortcut icon" href="/favicon.ico"/>
+		<link rel="stylesheet" type="text/css" href="static/stylesheet.css">
 	</head>
-
 	<body>
-		<div class: "title"> <h1 id="title"> How was your day? </h1> </div>
-		<h3 id="question"> Please, tell us how your day was here: </h3>
+        <div class= "top"></div>
+		<div class= "title">
+		    <h1 id="title"> How was your day? </h1>
+		</div>
+		<div "question">
+    		<h3 id="question"> Please, tell us how your day was here: </h3>
+    	</div>
 
-		<p>
+		<div class="inquiry">
 			<form action="form_hit" method="METH">
-  		<input type="text" name="rant_text"><br>
-  		<input type="submit" value="Submit">
+  		    <input type="textarea" id="rant" name="rant_text"><br>
+  		    <input type="submit" value="Submit">
 			</form>
-		</p>
+		</div>
+
+		<div class="bottom"></div>
 
 	</body>
 

@@ -1,23 +1,39 @@
 body {
   background-color:#5DADE2;
 }
-div.top {
-  background-color:#154360
-  height:15%;
+div.top{
+  height:27%;
   width:100%;
+  background-color:#154360
 }
 #title {
-  font-family:Times,Impact,serif;
-  color:#52BE80;
+  font-family:Impact,serif;
+  color:#0B5345;
   text-align:center;
 }
 #question {
   color:#F9EBEA;
   text-align:center;
 }
-p{
-  text-align:center;
+#rant {
+    margin:auto;
+    resize:none;
+    text-align:center;
+    width:35%;
+    maxlength:100;
+    height:15%;
+  }
+div.question{
+    text-align:center;
+}
+div.inquiry{
+    text-align:center;
 }
 div.title{
-  height:10%;
+  height:50px;
+}
+div.bottom{
+  height:27%;
+  width:100%;
+  background-color:#154360;
 }
