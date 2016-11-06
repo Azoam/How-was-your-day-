@@ -65,25 +65,25 @@ def updateResponse(s,l):
 	if l == 'lose' or l == 'lost':
 		for x in tagged:
 			print(x)
-			if x[1] == 'NN' or x[1] == 'NNP':
+			if x[1].startswith("N",0,1):
 				print(x[1])
-				return " I'm sorry you lost your "+x[0]"."
-	if l == 'fail':
+				return " I'm sorry you lost your "+x[0]+"."
+	if l == 'failing':
 		for x in tagged:
-			if x[1] == 'NN' or x[1] == 'NNP':
-				return " I'm sorry you are failing your "+x[0]"."
+			if x[1].startswith("N",0,1):
+				return " I'm sorry you are failing your "+x[0]+"."
 	if l == 'failed':
 		for x in tagged:
-			if x[1] == 'NN' or x[1] == 'NNP':
-				return " I'm sorry you failed your "+x[0]"."
+			if x[1].startswith("N",0,1):
+				return " I'm sorry you failed your "+x[0]+"."
 	if l == 'passed':
 		for x in tagged:
-			if x[1] == 'NN' or x[1] == 'NNP':
-				return " I'm glad you passed your "+x[0]+"!"
+			if x[1].startswith("N",0,1):
+				return " I'm glad you passed your "+x[0]++"!"
 	if l == 'hate':
 		for x in tagged:
 			if x[1] == 'NN':
-				return " I'm sorry you hate your "+x[0]"."
+				return " I'm sorry you hate your "+x[0]+"."
 			if x[1] == 'NNP':
-				return " I'm sorry you hate "+x[0]"."
+				return " I'm sorry you hate "+x[0]+"."
 	return ""
