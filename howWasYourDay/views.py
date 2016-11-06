@@ -11,9 +11,7 @@ def form_hit():
 
 	if request.method == 'POST':
 		rantText = request.form['rant_text']
-		print(rantText)
 		response_file = alchemy_language.emotion(text=rantText)
-		print(rantText)
 		anger = response_file['docEmotions']['fear']
 		disgust = response_file['docEmotions']['disgust']
 		fear = response_file['docEmotions']['fear']
@@ -21,7 +19,7 @@ def form_hit():
 		sadness = response_file['docEmotions']['sadness']
 		topEmotion = max(anger,disgust,fear,joy,sadness)
 		botEmotion = min(anger,disgust,fear,joy,sadness)
-		response = "test"
+		response = ""
 		if topEmotion == anger:
 			response = "I'm sorry your day was filled some anger"
 
@@ -36,7 +34,6 @@ def form_hit():
 	
 		if topEmotion == sadness:
 			response = "I'm sorry your day was filled with sadness :("
-		print(rantText)
 
 		return render_template('index1.html' , rant_text = rantText, response_text = response)
 	
