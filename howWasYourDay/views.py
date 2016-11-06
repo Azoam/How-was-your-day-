@@ -86,4 +86,11 @@ def updateResponse(s,l):
 				return " I'm sorry you hate your "+x[0]+"."
 			if x[1] == 'NNP':
 				return " I'm sorry you hate "+x[0]+"."
+
+	if l == 'good' or l == 'well' or l == 'great':
+		for x in tagged:
+			if x[1] == 'NN' or x[1] == 'NNS':
+				return " I'm glad your "+x[0]+" went well!"
+			if x[1] == 'NNP':
+				return " I'm glad "+x[0]+" is doing well!"
 	return ""
