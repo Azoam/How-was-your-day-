@@ -1,6 +1,7 @@
 from flask import render_template,request
 from howWasYourDay import app
 import json
+import nltk
 from watson_developer_cloud import AlchemyLanguageV1
 alchemy_language = AlchemyLanguageV1(api_key="cbef99146639642b05117516a24952154ed215ad")
 @app.route('/')
@@ -34,9 +35,31 @@ def form_hit():
 	
 		if topEmotion == sadness:
 			response = "I'm sorry your day was filled with sadness :("
+		
+		rantTextT = rantText
+		rantTextT = rantTextT.replace("!",".")
+		rantTextT = rantTextT.replace("?",".")
+		listOfSentences = rantTextT.split(".")
+		listOfSentences = filter(lambda x: len(x) > 0, listOfSentences)
+		for x in listOfSentences:
+			y = x.split(" ")
+			for n in y:
+				response = response + str(updateResponse(x,n))
 
 		return render_template('index1.html' , rant_text = rantText, response_text = response)
 	
 	
-	
+def updateResponse(s,l):
+	print(s)
+	print(l)
+	tokens = nltk.word_tokenize(s)
+	tagged = nltk.pos_tag(tokens)
+	if l == 'lose' or l == 'lost':
+		for x in tagged:
+			print(x)
+			if x[1] == 'NN' or x[1] == 'NNP':
+				print(x[1])
+				return " I'm sorry you lost your "+x[0]
+	return ""
+			
 
