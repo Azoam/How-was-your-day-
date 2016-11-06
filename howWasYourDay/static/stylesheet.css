@@ -1,0 +1,23 @@
+body {
+  background-color:#5DADE2;
+}
+div.top {
+  background-color:#154360
+  height:15%;
+  width:100%;
+}
+#title {
+  font-family:Times,Impact,serif;
+  color:#52BE80;
+  text-align:center;
+}
+#question {
+  color:#F9EBEA;
+  text-align:center;
+}
+p{
+  text-align:center;
+}
+div.title{
+  height:10%;
+}
