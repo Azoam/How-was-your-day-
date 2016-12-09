@@ -3,7 +3,7 @@ from howWasYourDay import app
 import json
 import nltk
 from watson_developer_cloud import AlchemyLanguageV1
-alchemy_language = AlchemyLanguageV1(api_key="cbef99146639642b05117516a24952154ed215ad")
+alchemy_language = AlchemyLanguageV1(api_key="YOURAPIKEYHERE")
 @app.route('/')
 @app.route("/form_hit", methods=['GET','POST'])
 def form_hit():
