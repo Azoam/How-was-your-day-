@@ -43,7 +43,7 @@ six==1.5.2
 sqlalchemy-migrate==0.8.2
 ssh-import-id==3.21
 urlgrabber==3.9.1
-urllib3==1.7.1
+urllib3==1.26.5
 virtualenv==15.0.3
 watson-developer-cloud==0.22.0
 webassets==0.12.0
